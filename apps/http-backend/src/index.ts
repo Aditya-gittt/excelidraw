@@ -4,7 +4,7 @@ import { CreateUserSchema } from "@repo/common/types";
 import {prismaClient} from "@repo/db/client";
 
 const app = express();
-
+app.use(express.json());
 
 app.post("/signup", (req,res) => {
     const data = CreateUserSchema.safeParse(req.body);
