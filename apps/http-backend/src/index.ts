@@ -15,9 +15,25 @@ app.post("/signup", (req,res) => {
         return;
     }
 
-    res.json({
-        message: "success"
-    });
+    try{
+        prismaClient.user.create({
+            data: {
+                email: data.data.email,
+                password: data.data.password ,
+                username: data.data.username
+            }
+        })
+
+        res.json({
+            message: "success"
+        });
+    } catch(err) {
+
+        res.status(411).json({
+            message: "pirsma cant add it in database"
+        });
+    }
+
 } )
 
 app.post("/signin" , (req, res) => {
